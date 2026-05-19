@@ -1,0 +1,24 @@
+import streamlit as st
+import google.generativeai as genai
+from rich.console import Console
+
+# إعداد الواجهة
+st.set_page_config(page_title="الترسانة - تطبيق", layout="wide")
+st.title("🛡️ الترسانة - Adaptive Core (Web)")
+
+# إعداد مفتاح API
+api_key = st.sidebar.text_input("أدخل مفتاح Gemini API:", type="password")
+
+if api_key:
+    genai.configure(api_key=api_key)
+    # هنا يتم استدعاء دوال المنطق الخاصة بك من ملفك الأصلي
+    # ملاحظة: هذا هيكل مبسط للربط
+    st.sidebar.header("لوحة التحكم")
+    task = st.sidebar.selectbox("اختر المهمة:", ["التنفيذ", "المولد", "المراجع"])
+    
+    user_query = st.text_input("أدخل أمرك:")
+    if st.button("بدء المهمة"):
+        st.write(f"جاري تنفيذ: {task}...")
+        # هنا ستعمل الدوال الأصلية الخاصة بك
+else:
+    st.warning("يرجى إدخال مفتاح الـ API في القائمة الجانبية للبدء.")
